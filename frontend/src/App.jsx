@@ -8,6 +8,8 @@ import HomePage from "./pages/Homepage"
 import LoginPage from "./pages/Login"
 import RegisterPage from './pages/RegisterPage'
 import Footer from './components/footer'
+import AddAtendance from './pages/AddAttendance'
+import AddEmploye from './pages/AddEmployee'
 
 function App() {
   return (
@@ -17,6 +19,8 @@ function App() {
             <Route path="/" element={<HomePage/>}/>
             <Route path="/login" element={<LoginPage/>}/>
             <Route path="/register" element={<RegisterPage/>}/>
+            <Route path="/addEmploye" element={<AddEmploye/>}/>
+            <Route path="/addAttendance" element={<AddAtendance/>}/>
         </Routes>
         <Footer/>
     </>

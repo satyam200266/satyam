@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {useState} from 'react'
 import { Link } from 'react-router-dom'
 import styled from "styled-components"
 import { useNavigate } from "react-router-dom"
@@ -38,7 +38,14 @@ const Right = styled.div`
 `
 
 function NavBar() {
+    const [user, setUser] = useState(JSON.parse(localStorage.getItem("user")))
     const navigate = useNavigate()
+
+    const handleLogout = () => {
+        setUser(false)    
+        navigate("/") 
+        localStorage.clear()
+    }
   return (
     <Container>
         <Left onClick={() => navigate('/')}>
@@ -46,8 +53,17 @@ function NavBar() {
             <h2>Satyam</h2>
         </Left>
         <Right>
-            <Link to="login">Login</Link>
-            <Link to="/register">Register</Link>
+            {!user ? <>
+                <Link to="login">Login</Link>
+                <Link to="/register">Register</Link>
+            </>:
+            <>
+                <Link to="/addEmploye">Add Employes</Link>
+                <Link to="/addAttendance">Add Attendence</Link>
+                <p onClick={handleLogout}>Logout</p>
+            </>
+            }
+
         </Right>
     </Container>
   )

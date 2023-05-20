@@ -1,0 +1,11 @@
+const mongoose = require('mongoose')
+const { Schema } = mongoose;
+
+const attendanceSchema = new Schema({
+    userId : {type: String, required: true},
+    status : {type: Number, required: true }, //1 for present, 2 for halfDat and 0 for absenet
+    date : {type: String, required: true},
+})
+
+const Attendance = mongoose.model("attendence", attendanceSchema);
+module.exports = Attendance;
