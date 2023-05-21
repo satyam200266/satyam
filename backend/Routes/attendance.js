@@ -28,7 +28,7 @@ route.post("/add/:userId/:id", verifyToken, async (req, res) => {
     }
 });
 
-route.get("/:id", verifyToken, async (req, res) => {
+route.get("/:id", async (req, res) => {
     try {
         const dbRes = await Attendance.find({userId: req.params.id})
         res.status(200).json(dbRes);

@@ -4,7 +4,7 @@ const formateDate = (date) => {
     const month = (today.getMonth() + 1).toString().padStart(2, '0'); // January is 0
     const year = today.getFullYear();
 
-    return `${year}/${month}/${day}`
+    return `${year}-${month}-${day}`
 }
 
 module.exports ={ formateDate }
