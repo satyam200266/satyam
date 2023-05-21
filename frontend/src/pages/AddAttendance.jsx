@@ -104,8 +104,8 @@ function AddAttendence() {
    
     const fetch = async () => {
         try {
-            const {data} = await req.get(`/employes`)
-            setEmployes(p => [...p, ...data])
+            const {data} = await req.get(`/employes/all`)
+            setEmployes(data)
         } catch (error) {
             console.log(error)
         }
@@ -141,7 +141,7 @@ function AddAttendence() {
                 </Sections>
                 <Search><VscAdd/>Search</Search>
             </FilterSection>
-            <AddAtendance employes={employes} setEmployes={employes} />
+            <AddAtendance employes={employes} setEmployes={setEmployes} />
         </Wrapper>
     </Container>
   )

@@ -54,7 +54,7 @@ function NavBar() {
   return (
     <Container>
         <Left onClick={() => navigate('/')}>
-            <img src={img}/>
+            <img src="https://static.thenounproject.com/png/3627272-200.png"/>
             <h1><b>Employee Administration</b></h1>
         </Left>
         <Right>

@@ -1,6 +1,8 @@
-import React from 'react'
+import React, {useState} from 'react'
 import styled from 'styled-components'
 import {AiOutlineUserAdd} from "react-icons/ai"
+import { req } from '../axisInstance'
+import { useNavigate } from 'react-router-dom'
 
 const Container = styled.div`
     background-color: #4bb9b7;
@@ -65,11 +67,20 @@ const Select = styled.select`
     border-bottom: 3px solid #D9D9D9;
 `
 
-//or kya?
-//ye dekh wo jo mene add employee likha hu na usko placeholder ke size ka krna hai aur calender aur wo word ke bich me bohot gap hai
+function AddEmploye() { 
+    const navigate = useNavigate()
+    const [formData, setFormdata] = useState({name: "",number: "", joiningDate: "",salary: "",position: ""})
+    const handleChange = (e) => setFormdata(p => ({...p, [e.target.name]: e.target.value}))
 
-
-function AddEmploye() {
+    const handleSubmit = async (e) => {
+        e.preventDefault()
+        try {
+            const {data} = req.post("/employes",formData)
+            navigate("/addAttendance")
+        } catch (error) {
+            
+        }
+    }
   return (
     <Container>
         <Wrapper>
@@ -77,19 +88,19 @@ function AddEmploye() {
         <AiOutlineUserAdd/><h1>Employee Details</h1>
         </div>
 
-            <Form>
-                <Input type='name' placeholder='Employee Name'/>
-                <Input type='tel' placeholder='Contact Number' maxLength={10}/>
+            <Form onSubmit={handleSubmit}>
+                <Input type='name' placeholder='Employee Name' value={formData.name} name='name'  onChange={handleChange}/>
+                <Input type='tel' placeholder='Contact Number' maxLength={10} value={formData.number} name='number' onChange={handleChange}/>
                 <div>
-                <p>Employee Field</p><Select>
-                            <option value="0">Select Field</option>
-                            <option value="1">labour</option>
-                            <option value="2">poslish</option>
+                <p>Employee Field</p><Select value={formData.position} name='position' onChange={handleChange}>
+                            <option hidden>Select Field</option>
+                            <option value="labour">labour</option>
+                            <option value="poslish">poslish</option>
                          </Select>
                          </div>
-                <Input type='tel' placeholder='Salary' minLength={3} maxLength={5}/>
+                <Input type='number' placeholder='Salary' minLength={3} maxLength={5} value={formData.salary} name='salary'  onChange={handleChange}/>
                     <div>
-                        <p>Date of joinning</p><Input type='date'/>
+                        <p>Date of joinning</p><Input type='date' value={formData.joiningDate} name='joiningDate' onChange={handleChange}/>
                     </div>                
                 <button>Add Employee</button>
             </Form>

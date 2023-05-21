@@ -1,6 +1,6 @@
 import styled from 'styled-components'
-import { req } from '../axisInstance'
 import { useNavigate } from 'react-router-dom'
+import { req } from '../axisInstance'
 
 const TableWrapper = styled.div`
     margin-top: 20px;   
@@ -84,19 +84,20 @@ const Options = styled.option`
 function AddAtendance({employes, setEmployes}) {
     const navigate = useNavigate()
 
-const handleStateChange = async (id, e) => {
-    const { value } = e.target;
+const handleAttandence = async (userInfo, action, index) => {
+    console.log({index})
+    req
     try {
-        const {data} = await req.put(`/api/orders/status/${id}`, {status: value})
-        // setOrders(p => p.map((o) => {
-        //     if(o._id === id) {
-        //         return {...o, orderStatus: value}
-        //     }
-        //     return o;
-        // }))
+        const {data} = await req.post(`/attendence/add/${userInfo._id}/${action}`)
+        console.log(data)
+        setEmployes(p => {
+            const newData = [...p]
+            newData[index] = {...newData[index], attendences: [data]}
+            return newData
+        })
     } catch (error) {
+        console.log(error)
     }
-
 }
 
   return ( <>
@@ -113,20 +114,22 @@ const handleStateChange = async (id, e) => {
                 
             </Thead>
             <Tbody>
-                {employes?.map((o, i) => {
+                {employes?.map((o, index) => {
                     return <Tr key={o._id}>
-                        <Td>{++i}</Td>
+                        <Td>{index+1}</Td>
                         <Td>{o.name}</Td>
                         <Td>{o.number}</Td>
                         <Td>{o.position}</Td>
                         <Td>
                             <CheckBoxContainer>
-                                {["present", "absent", "Half Day"].map((e, i) => {
-                                    return <CheckBoxWrapper>
-                                        <input name={o._id} id={`${o._id}${e}`} type='radio'/>
-                                        <label htmlFor={`${o._id}${e}`}>{e}</label>
+                                {o.attendences?.length ? "Attendence is Already marked" :
+                                [{key: 1, lable: "present"}, {key: 0, lable: "absent"}, {key: 2, lable: "Half Day"}].map((e) => {
+                                    return <CheckBoxWrapper key={e.key}>
+                                        <input name={o._id} id={`${o._id}${e.lable}`} type='radio' onClick={() => handleAttandence(o, e.key, index)} />
+                                        <label htmlFor={`${o._id}${e.lable}`}>{e.lable}</label>
                                     </CheckBoxWrapper>
-                                })}
+                                })
+                                }
                             </CheckBoxContainer>
                         </Td>
                     </Tr>
