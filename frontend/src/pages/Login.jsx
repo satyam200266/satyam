@@ -5,7 +5,7 @@ import { req } from '../axisInstance'
 import { useNavigate } from 'react-router-dom'
 
 const Container = styled.div`
-    background-color: #eee;
+    background-color: #8efefc;
     display: flex;
     justify-content: center;
     align-items: center;

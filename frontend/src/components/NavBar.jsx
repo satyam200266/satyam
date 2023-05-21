@@ -2,6 +2,7 @@ import React, {useState} from 'react'
 import { Link } from 'react-router-dom'
 import styled from "styled-components"
 import { useNavigate } from "react-router-dom"
+import img from "../img/img3.jpg"
 
 const Container = styled.div`
      display: flex;
@@ -10,11 +11,12 @@ const Container = styled.div`
      padding: 0 10px;
      gap: 1rem;
      height: 70px;
-     background-color: #95c2dd;
+     background-color: #26d5d2;
 
      a {
         color: black;
         text-decoration: none;
+        font-size: 1.3rem;
      }
 
     > div {
@@ -29,12 +31,15 @@ const Left = styled.div`
     >img {
         height: 100%;
     }
-    >h2{
+    >h1{
         height: max-content;
     }
     cursor: pointer;
 `
 const Right = styled.div`
+    >link{
+        height: 100%;
+    }
 `
 
 function NavBar() {
@@ -49,18 +54,18 @@ function NavBar() {
   return (
     <Container>
         <Left onClick={() => navigate('/')}>
-            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/f/f4/BMW_logo_%28gray%29.svg/2048px-BMW_logo_%28gray%29.svg.png"/>
-            <h2>Satyam</h2>
+            <img src={img}/>
+            <h1><b>Employee Administration</b></h1>
         </Left>
         <Right>
             {!user ? <>
-                <Link to="login">Login</Link>
-                <Link to="/register">Register</Link>
+                <Link to="login"><b>Login</b></Link>
+                <Link to="/register"><b>Register</b></Link>
             </>:
             <>
-                <Link to="/addEmploye">Add Employes</Link>
-                <Link to="/addAttendance">Add Attendence</Link>
-                <p onClick={handleLogout}>Logout</p>
+                <Link to="/addEmploye"><b>Add Employes</b></Link>
+                <Link to="/addAttendance"><b>Add Attendence</b></Link>
+                <p onClick={handleLogout}><b>Logout</b></p>
             </>
             }
 
