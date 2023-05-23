@@ -50,12 +50,13 @@ function HeatMapChart({ userData }) {
     },[userData])
 
     const handleMouseEnter = (event, value, t) => {
+      console.log("hemloo")
         const tooltip = tooltipRef.current;
         tooltip.style.opacity = 1;
         tooltip.animate({
             left : `${event.clientX}px` ,
             top :`${event.clientY}px`
-        }, {duration: 2000, fill: "forwards"})
+        }, {duration: 100, fill: "forwards"})
         setHoverdData(value)
       };
     
@@ -89,7 +90,7 @@ function HeatMapChart({ userData }) {
       <Tooltip ref={tooltipRef}>
         <p>Date: {hoverData?.date || "N/A"}</p>
         <p>Status: {getStatus(hoverData)}</p>
-        <p>remark: {hoverData?.remark || "N/A"}</p>
+        <p>Remark: {hoverData?.remark || "N/A"}</p>
       </Tooltip>
       </>  
       : <p>No Data Found!!</p>

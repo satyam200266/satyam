@@ -3,7 +3,7 @@ import styled from 'styled-components'
 import { Link } from 'react-router-dom'
 
 const Container = styled.div`
-    background-color: #8efefc;
+    background-color: #ffbebe;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -48,6 +48,7 @@ const Form = styled.form`
         border: none;
         color: white;
         text-transform: uppercase;
+        cursor: pointer;
     }
 `
 

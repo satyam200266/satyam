@@ -15,14 +15,14 @@ const Table = styled.table`
     overflow: auto  ;
 `
 const Thead = styled.thead`
-    background-color: teal;
+    background-color: #ff6d6d;
     color: white;
 `
 const Tbody = styled.tbody`
     background-color: white;
 
     > :nth-last-child() {
-        border-bottom: 2px solid teal;
+        border-bottom: 2px solid #ff6d6d;
         background-color: red;
     }
     
