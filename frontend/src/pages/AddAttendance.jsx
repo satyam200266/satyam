@@ -14,7 +14,7 @@ const Container = styled.div`
     display: flex;
     flex-direction: column;
     align-items: center;
-    background-color: #F4F5F7;
+    background-color: #ffbebe;
     box-sizing: border-box;
 `
 const Wrapper = styled.div`
@@ -65,7 +65,7 @@ const SearchOrder = styled.input`
 
     /* Firefox */
     input[type=number] {
-    -moz-appearance: textfield;
+-moz-appearance: textfield;
     }
 `
 const Sections = styled.select`
@@ -76,7 +76,7 @@ const Options = styled.option`
 `
 const Search = styled.button`
     flex: 1;
-    background-color: teal;
+    background-color: #ff6d6d;
     color: white;
     font-weight: 600;
     display: flex;
@@ -120,12 +120,12 @@ function AddAttendence() {
 
   return (
 <Container>
-        <Title>Orders</Title>
+        <Title><h1>Attandance</h1></Title>
         <Wrapper>
             
             <FilterSection onSubmit={search}>
-                <SearchOrder type="number" placeholder='Search by customer number' onChange={(e) => handleS(e, {type: "search"})}></SearchOrder>
-                <Sections>
+                <SearchOrder type="number" placeholder='Search Employee Name' onChange={(e) => handleS(e, {type: "search"})}></SearchOrder>
+                {/* <Sections>
                     <Options hidden>Status</Options>
                     <Options value="pending">Pending</Options>
                     <Options value="processing">Processing</Options>
@@ -138,7 +138,7 @@ function AddAttendence() {
                     <Options value="price-desc">Price High to low</Options>
                     <Options value="newest">New Orders</Options>
                     <Options value="oldest">Old Orders (default)</Options>
-                </Sections>
+                </Sections> */}
                 <Search><VscAdd/>Search</Search>
             </FilterSection>
             <AddAtendance employes={employes} setEmployes={setEmployes} />

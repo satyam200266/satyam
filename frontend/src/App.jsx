@@ -10,6 +10,9 @@ import RegisterPage from './pages/RegisterPage'
 import Footer from './components/footer'
 import AddAtendance from './pages/AddAttendance'
 import AddEmploye from './pages/AddEmployee'
+import ManageEmployes from './pages/ManageEmployes'
+import AddNote from './components/Modal'
+import Setting from './pages/Setting'
 
 function App() {
   return (
@@ -21,6 +24,9 @@ function App() {
             <Route path="/register" element={<RegisterPage/>}/>
             <Route path="/addEmploye" element={<AddEmploye/>}/>
             <Route path="/addAttendance" element={<AddAtendance/>}/>
+            <Route path="/ManageEmployes" element={<ManageEmployes/>}/>
+            <Route path="/Setting" element={<Setting/>}/>
+
         </Routes>
         <Footer/>
     </>

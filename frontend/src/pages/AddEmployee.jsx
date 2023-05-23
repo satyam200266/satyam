@@ -5,7 +5,7 @@ import { req } from '../axisInstance'
 import { useNavigate } from 'react-router-dom'
 
 const Container = styled.div`
-    background-color: #4bb9b7;
+    background-color: #ffbebe;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -91,14 +91,28 @@ function AddEmploye() {
             <Form onSubmit={handleSubmit}>
                 <Input type='name' placeholder='Employee Name' value={formData.name} name='name'  onChange={handleChange}/>
                 <Input type='tel' placeholder='Contact Number' maxLength={10} value={formData.number} name='number' onChange={handleChange}/>
-                <div>
-                <p>Employee Field</p><Select value={formData.position} name='position' onChange={handleChange}>
+                {/* <div>
+                <p>Work Catagory</p><Select value={formData.position} name='position' onChange={handleChange}>
                             <option hidden>Select Field</option>
-                            <option value="labour">labour</option>
-                            <option value="poslish">poslish</option>
+                            <option value="Shope">Shope</option>
+                            <option value="Carpenter">Carpenter</option>
+                            <option value="Call Center">Call Center</option>
+                            <option value="Hotel">Hotel</option>
+                            <option value="Garage">Garage</option>
                          </Select>
-                         </div>
-                <Input type='number' placeholder='Salary' minLength={3} maxLength={5} value={formData.salary} name='salary'  onChange={handleChange}/>
+                         </div> */}
+            <div>
+                <p>Employee Catagory</p>
+                <Select value={formData.position} name='position' onChange={handleChange}>
+                <option hidden>Select Field</option>
+                <option value="Labour">Labour</option>
+                <option value="Poslish Man">Poslish Man</option>
+                <option value="Casher">Casher</option>
+                <option value="Waiter">Waiter</option>
+                <option value="Machanic">Machanic</option>
+                </Select>
+            </div>
+                <Input type='tel' placeholder='Salary' minLength={3} maxLength={5} value={formData.salary} name='salary'  onChange={handleChange}/>
                     <div>
                         <p>Date of joinning</p><Input type='date' value={formData.joiningDate} name='joiningDate' onChange={handleChange}/>
                     </div>                
