@@ -1,5 +1,6 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
+import { req } from '../axisInstance';
 
 const StyledTable = styled.table`
   width: 100%;
@@ -85,26 +86,26 @@ const ModalSelect = styled.select`
 const ModalButton = styled(TableButton)``;
 
 function ManageEmployes() {
-  const [employees, setEmployees] = useState([
-    { id: 1, name: 'John Doe' },
-    { id: 2, name: 'Jane Smith' },
-    { id: 3, name: 'Bob Johnson' },
-    { id: 4, name: 'satyam' },
-    { id: 5, name: 'vivek hacker' },
-    { id: 6, name: 'vivek coder' },
-    { id: 7, name: 'vivek programer' },
-    { id: 8, name: 'satyam vishwakarma' },
-    { id: 9, name: 'vivek' },
-    { id: 10, name: 'satyam programer' }
-  ]);
+  const [employees, setEmployees] = useState([]);
 
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [selectedEmployee, setSelectedEmployee] = useState(null);
   
 
+    useEffect(() => {
+        (async () => {
+            try {
+                const {data} = await req.get(`/employes/all`)
+                setEmployees(data)
+            } catch (error) {
+                console.log(error)
+            }
+        })()
+    },[])
+
   const removeEmployee = (id) => {
     setEmployees((prevEmployees) =>
-      prevEmployees.filter((employee) => employee.id !== id)
+      prevEmployees.filter((employee) => employee._id !== id)
     );
   };
 
@@ -134,20 +135,20 @@ function ManageEmployes() {
         </thead>
         <tbody>
           {employees.map((employee, index) => (
-            <tr key={employee.id}>
+            <tr key={employee._id}>
               <TableData>{index + 1}</TableData>
               <TableData>{employee.name}</TableData>
-              <TableData>9854763210</TableData>
-              <TableData>worker</TableData>
-              <TableData>30000</TableData>
-              <TableData>25/05/23</TableData>
+              <TableData>{employee.number}</TableData>
+              <TableData>{employee.position}</TableData>
+              <TableData>{employee.salary}</TableData>
+              <TableData>{employee.joiningDate}</TableData>
               <TableData>
                 <TableButton onClick={() => openModal(employee)}>
                   Edit
                 </TableButton>
               </TableData>
               <TableData>
-                <TableButton onClick={() => removeEmployee(employee.id)}>
+                <TableButton onClick={() => removeEmployee(employee._id)}>
                   Remove
                 </TableButton>
               </TableData>

@@ -5,13 +5,16 @@ import styled from "styled-components"
 // import {IoIosPeople} from "react-icons/io"
 import HeatMap from '../components/HeatMap.jsx'
 import { req } from '../axisInstance.js'
+import { useDispatch, useSelector } from 'react-redux'
+import { addNotice } from '../redux/notice.js'
 
 const Container = styled.div`
+    padding: 0 0 2rem 0;
   background-color: #ffbebe;
     display: flex;
     flex-direction: column;
     align-items: center;
-    height: calc(100vh - 70px);
+    min-height: calc(100vh - 70px);
     >*{
         margin: 1rem;
     }
@@ -49,14 +52,21 @@ const Option = styled.option`
 
   
 function Homepage() {
+    const notice = useSelector(p => p.notice.notice)
+    console.log(notice)
+    const dispatch = useDispatch()
     const [employes, setEmployes] = useState([])
     const [selectedEmployes, setSelectedEmployes] = useState(localStorage.getItem("name") || "")
     const [attendence, setAttendence] = useState([])
     useEffect(() => {
         (async () => {
             try {
-                const {data} = await req.get(`/employes`)
-                setEmployes(data)
+                const [emp, not] = await Promise.all([
+                    req.get(`/employes`),
+                    req.get("/notice")
+                ])
+                dispatch(addNotice(not.data))
+                setEmployes(emp.data)
             } catch (error) {
                 console.log(error)
             }
@@ -79,6 +89,7 @@ function Homepage() {
         localStorage.setItem("name", e.target.value )
         setSelectedEmployes(e.target.value)
     }
+
   return (
     <Container>
             {/* <CardSection>
@@ -98,18 +109,12 @@ function Homepage() {
                 <HeatMap userData={attendence}/>
             </section>
 
-            <div style={{ backgroundColor: '#ffffff', padding: '20px', width: '1500px',borderRadius: '4px' }}>
-                <h2 style={{ padding: '2px' }}>Notice :-</h2>
-                    <a style={{ color: '#000000' }}>
-                        At our company, we believe in the power of teamwork and the potential within each and every one of our employees. We encourage you to embrace challenges as opportunities for growth and innovation. Your dedication, creativity, and determination are the driving forces behind our collective success. Together, we can achieve extraordinary things and make a lasting impact in the world.
-                    </a>
-            </div>
-
-            <div>
-                <h2 style={{ padding: '2px' }}>Employee Feedback :-</h2>
-                <textarea id="employee-feedback" name="employee-feedback" rows="5" placeholder="Enter your feedback here" style={{ width: '1500px', borderRadius: '4px' }}></textarea>
-                <button type="submit" style={{ display: 'flex',justifyContent: 'center', alignItems: 'center', width: '100px', height: '30px', padding: '2px', backgroundColor: '#ff6d6d', borderRadius: '5px', cursor: 'pointer' }}>Submit</button>
-            </div>
+            {notice && <div style={{ backgroundColor: '#ffffff', padding: '20px', width: '1500px',borderRadius: '4px' }}>
+                <div  style={{ display: "flex", justifyContent: "space-between" }}>
+                    <h2 style={{ padding: '2px' }}>Notice :-</h2> <small>{new Date(notice?.createdAt).toString()}</small>
+                </div>
+                <p>{notice?.title}</p>
+            </div>}
     </Container>
   )
 }

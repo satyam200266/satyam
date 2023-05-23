@@ -3,6 +3,8 @@ import { Link } from 'react-router-dom'
 import styled from 'styled-components'
 import { req } from '../axisInstance'
 import { useNavigate } from 'react-router-dom'
+import { useDispatch } from 'react-redux'
+import { login } from '../redux/user'
 
 const Container = styled.div`
     background-color: #ffbebe;
@@ -67,7 +69,7 @@ const ErrorComponent = styled.div`
 
 
 function Login() {
-    const navigate = useNavigate()
+ const dispatch = useDispatch()
 const [formData, setFormData] = useState({email: "", password: ""})
 const [error, setError] = useState("")
 
@@ -77,8 +79,7 @@ const [error, setError] = useState("")
     e.preventDefault()
     try {
         const {data} = await req.post("auth/login", formData)
-        localStorage.setItem("user", JSON.stringify(data))
-        navigate("/")
+        dispatch(login(data))
     } catch (error) {
         setError(error.response.data.message)
     }

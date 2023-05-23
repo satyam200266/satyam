@@ -5,8 +5,12 @@ import { useNavigate } from 'react-router-dom';
 import img from '../img/img3.jpg';
 import {AiOutlineMenu} from "react-icons/ai"
 import AddNote from '../pages/AddNote';
+import { useDispatch, useSelector } from 'react-redux';
+import { logout } from '../redux/user';
 
 const Container = styled.div`
+position: sticky;
+top: 0;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -87,15 +91,13 @@ const ModalOverlay = styled.div`
 `;
 
 function NavBar() {
-  const [user, setUser] = useState(JSON.parse(localStorage.getItem('user')));
+    
+    const dispatch = useDispatch()
+    const user = useSelector(s => s.user.user);
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const navigate = useNavigate();
 
-  const handleLogout = () => {
-    setUser(false);
-    navigate('/');
-    localStorage.clear();
-  };
+
 
   const toggleDropdown = () => {
     setIsDropdownOpen(!isDropdownOpen);
@@ -125,7 +127,7 @@ function NavBar() {
               <DropdownItem onClick={() => setIsAddNoteOpen(true)}>Add Note</DropdownItem>
               <DropdownItem to="/manageEmployes">Manage Employees</DropdownItem>
               <DropdownItem to="/Setting">Settings</DropdownItem>
-              <DropdownItem onClick={handleLogout}>Logout</DropdownItem>
+              <DropdownItem onClick={() => dispatch(logout())}>Logout</DropdownItem>
             </Dropdown>
           </>
         )}

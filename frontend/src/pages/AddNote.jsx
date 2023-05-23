@@ -1,6 +1,9 @@
 import React, {useState} from 'react'
 import Modal from '../components/Modal'
 import styled from "styled-components"
+import { req } from '../axisInstance';
+import { addNotice, deleteNotice } from '../redux/notice';
+import { useDispatch } from 'react-redux';
 
 const TextArea = styled.textarea`
   width: 500px;
@@ -14,9 +17,16 @@ const TextArea = styled.textarea`
 
 
 function AddNote({isOpen, setModal}) {
+    const dispatch = useDispatch()
   const [note, setNote] = useState('');
-  const handleSubmit = () => {
-    console.log("Hello Submited")
+  const handleSubmit = async () => {
+    try {
+        const {data} = await req.post("/notice", {title: note})
+        note ? dispatch(addNotice(data)) : dispatch(deleteNotice())
+        setModal(false)
+    } catch (error) {
+        console.log(error.response.data.message)
+    }
   }
   return (
     <Modal isOpen={isOpen} setModal={setModal} callback={handleSubmit}>

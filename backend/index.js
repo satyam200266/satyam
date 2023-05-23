@@ -16,6 +16,7 @@ app.get("/", (req, res) => {
 app.use("/employes", require("./Routes/emplyes"))
 app.use("/auth", require("./Routes/auth"))
 app.use("/attendence", require("./Routes/attendance"))
+app.use("/notice", require("./Routes/notice"))
 
 
 app.listen(PORT, () => {

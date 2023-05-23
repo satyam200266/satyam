@@ -1,0 +1,3 @@
+integrate redux
+alert
+navigate to home on logout
