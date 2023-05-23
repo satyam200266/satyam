@@ -121,7 +121,7 @@ function NavBar() {
         ) : (
           <>
             <DropdownButton onClick={toggleDropdown}><b><AiOutlineMenu/></b></DropdownButton>
-            <Dropdown isOpen={isDropdownOpen}>
+            <Dropdown isOpen={isDropdownOpen} onMouseUp={toggleDropdown}>
               <DropdownItem to="/addAttendance">Add Attendance</DropdownItem>
               <DropdownItem to="/addEmploye">Add Employees</DropdownItem>
               <DropdownItem onClick={() => setIsAddNoteOpen(true)}>Add Note</DropdownItem>
