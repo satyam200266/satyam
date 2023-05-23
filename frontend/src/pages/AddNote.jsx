@@ -4,6 +4,7 @@ import styled from "styled-components"
 import { req } from '../axisInstance';
 import { addNotice, deleteNotice } from '../redux/notice';
 import { useDispatch } from 'react-redux';
+import { toast } from 'react-toastify';
 
 const TextArea = styled.textarea`
   width: 500px;
@@ -24,6 +25,7 @@ function AddNote({isOpen, setModal}) {
         const {data} = await req.post("/notice", {title: note})
         note ? dispatch(addNotice(data)) : dispatch(deleteNotice())
         setModal(false)
+        toast.success("Note added Successfully!!")
     } catch (error) {
         console.log(error.response.data.message)
     }

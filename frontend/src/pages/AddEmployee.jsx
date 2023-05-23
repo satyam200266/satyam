@@ -3,6 +3,7 @@ import styled from 'styled-components'
 import {AiOutlineUserAdd} from "react-icons/ai"
 import { req } from '../axisInstance'
 import { useNavigate } from 'react-router-dom'
+import { toast } from 'react-toastify';
 
 const Container = styled.div`
     background-color: #ffbebe;
@@ -77,6 +78,7 @@ function AddEmploye() {
         try {
             const {data} = req.post("/employes",formData)
             navigate("/addAttendance")
+            toast.success("Successfully added !!")
         } catch (error) {
             
         }

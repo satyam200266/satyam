@@ -89,7 +89,7 @@ const [error, setError] = useState("")
     <Container>
         <Wrapper>
             <h1>Welcome</h1>
-            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/f/f4/BMW_logo_%28gray%29.svg/2048px-BMW_logo_%28gray%29.svg.png"/>
+            <img src="https://static.thenounproject.com/png/3627272-200.png"/>
             <Form onSubmit={onSubmit}>
                 <input name="email" onChange={handleOnChange} value={formData.email} type='email' placeholder='Email'/>
                 <input name="password" onChange={handleOnChange} value={formData.password} type='password' placeholder='Password'/>

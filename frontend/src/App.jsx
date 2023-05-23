@@ -7,7 +7,7 @@ import NavBar from './components/NavBar'
 import HomePage from "./pages/Homepage"
 import LoginPage from "./pages/Login"
 import RegisterPage from './pages/RegisterPage'
-import Footer from './components/footer'
+import Footer from './components/Footer'
 import AddAtendance from './pages/AddAttendance'
 import AddEmploye from './pages/AddEmployee'
 import ManageEmployes from './pages/ManageEmployes'
