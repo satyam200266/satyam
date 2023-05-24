@@ -7,7 +7,8 @@ import { useDispatch } from 'react-redux';
 import { toast } from 'react-toastify';
 
 const TextArea = styled.textarea`
-  width: 100%;
+  min-width: 300px;
+  max-width: 600px;
   min-height: 250px;
   max-height: 500px;
   border: 1px solid #ccc;

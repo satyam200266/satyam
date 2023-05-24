@@ -69,7 +69,7 @@ const DropdownItem = styled(Link)`
   width: 200px;
 
   &:hover {
-    background-color: #ffbebe;
+    background-color: #adcfff;
   }
 `;
 

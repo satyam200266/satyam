@@ -18,11 +18,12 @@ margin-top: 100px;
     width: 400px;
     max-width: 90%;
     height: max-content;
-    padding: 2rem;
+    padding: 1rem;
     display: flex;
     flex-direction: column;
     align-items: center;
     box-shadow: 0px 0px 20px 6px rgba(0,0,0,0.1);
+    margin-bottom: 10px;
     >img {
         width: 20%;
         margin-bottom: 3rem;
@@ -42,7 +43,7 @@ const Form = styled.form`
     width: 100%;
     display: flex;
     flex-direction: column;
-    gap: 2rem;
+    gap: 1rem;
 
     >button {
         background: #3563c7;
@@ -86,10 +87,10 @@ function AddEmploye() {
     }
   return (
     <Container>
-        <h1>Add Employee</h1>
+        <h1 style={{marginTop: '4px'}}>Add Employee</h1>
     <Wrapper>
         <div>
-        <AiOutlineUserAdd/><h1>Employee Details</h1>
+        <AiOutlineUserAdd/><h3>Employee Details</h3>
         </div>
             <Form onSubmit={handleSubmit}>
                 <Input type='name' placeholder='Employee Name' value={formData.name} name='name'  onChange={handleChange}/>

@@ -4,11 +4,7 @@ import { req } from '../axisInstance'
 import {VscAdd} from "react-icons/vsc"
 import AddAtendance from '../components/AttendenceTable'
 
-
-
-
 const Container = styled.div`
-    padding: 1rem 0;
     min-height: 100vh;
     width: 100%;
     display: flex;
@@ -97,7 +93,6 @@ const LoadMoreBtn = styled.p`
     }
 `
 
- 
 function AddAttendence() {
     
     const [employes, setEmployes] = useState([])
@@ -120,12 +115,11 @@ function AddAttendence() {
 
   return (
 <Container>
-        <Title><h1>Attandance</h1></Title>
+            <h1 style={{marginTop: '4px'}}>Add Employee</h1>
         <Wrapper>
-            
-            <FilterSection onSubmit={search}>
+            {/* <FilterSection onSubmit={search}>
                 <SearchOrder type="number" placeholder='Search Employee Name' onChange={(e) => handleS(e, {type: "search"})}></SearchOrder>
-                {/* <Sections>
+                <Sections>
                     <Options hidden>Status</Options>
                     <Options value="pending">Pending</Options>
                     <Options value="processing">Processing</Options>
@@ -138,9 +132,9 @@ function AddAttendence() {
                     <Options value="price-desc">Price High to low</Options>
                     <Options value="newest">New Orders</Options>
                     <Options value="oldest">Old Orders (default)</Options>
-                </Sections> */}
+                </Sections>
                 <Search><VscAdd/>Search</Search>
-            </FilterSection>
+            </FilterSection> */}
             <AddAtendance employes={employes} setEmployes={setEmployes} />
         </Wrapper>
     </Container>

@@ -10,7 +10,7 @@ const StyledTable = styled.table`
   border: 2px solid #000000;
   border-radius: 1vmin;
   >tbody {
-    background-color: skyblue;
+    background-color: #99b9ff;
   }
 `;
 
@@ -28,7 +28,7 @@ const TableData = styled.td`
 `;
 
 const TableButton = styled.button`
-  background-color: #ff6d6d;
+  background-color: #3563c7;
   color: #ffffff;
   border: none;
   padding: 8px 10px;
@@ -65,6 +65,8 @@ const ModalOverlay = styled.div`
 const ModalContent = styled.div`
   background-color: #adcfff;
   border-radius: 8px;
+  padding: 20px;
+  margin: 15px;
 `;
 
 // modal/
@@ -142,6 +144,7 @@ function ManageEmployes() {
 
   return (
     <PageWrapper>
+      <h1 style={{marginTop: '4px'}}>Employee Management</h1>
       <StyledContainer>
         <StyledTable>
           <thead>

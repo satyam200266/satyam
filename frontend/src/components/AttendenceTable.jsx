@@ -15,7 +15,7 @@ const Table = styled.table`
     overflow: auto  ;
 `
 const Thead = styled.thead`
-    background-color: #ff6d6d;
+    background-color: #3563c7;
     color: white;
 `
 const Tbody = styled.tbody`
@@ -107,8 +107,8 @@ const handleAttandence = async (userInfo, action, index) => {
                 <tr>
                     <Td>NO.</Td>
                     <Td>NAME</Td>
-                    <Td>PHONE</Td>
-                    <Td>EMPLOYEE FIELD</Td>
+                    {/* <Td>PHONE</Td>
+                    <Td>EMPLOYEE FIELD</Td> */}
                     <Td>ATTENDENCE</Td>
                 </tr>
                 
@@ -118,8 +118,8 @@ const handleAttandence = async (userInfo, action, index) => {
                     return <Tr key={o._id}>
                         <Td>{index+1}</Td>
                         <Td>{o.name}</Td>
-                        <Td>{o.number}</Td>
-                        <Td>{o.position}</Td>
+                        {/* <Td>{o.number}</Td>
+                        <Td>{o.position}</Td> */}
                         <Td>
                             <CheckBoxContainer>
                                 {o.attendences?.length ? "Attendence is Already marked" :

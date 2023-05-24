@@ -113,8 +113,10 @@ function Homepage() {
           style={{
             backgroundColor: '#ffffff',
             padding: '20px',
-            width: '100%',
+            minWidth: '200px',
+            maxWidth: '1000px',
             borderRadius: '4px',
+            margin: '20px'
           }}
         >
           <div style={{ display: 'flex', justifyContent: 'space-between' , margin: "0 1rem"}}>
