@@ -3,16 +3,16 @@ import styled from 'styled-components'
 import {AiOutlineUserAdd} from "react-icons/ai"
 import { req } from '../axisInstance'
 import { useNavigate } from 'react-router-dom'
-import { toast } from 'react-toastify';
 
 const Container = styled.div`
-    background-color: #ffbebe;
+    background-color: #adcfff;
     display: flex;
-    justify-content: center;
     align-items: center;
     height: calc(100vh - 70px);
+    flex-direction: column;
 `
 const Wrapper = styled.div`
+margin-top: 100px;
     border-radius: 0.5rem;
     background-color: white;
     width: 400px;
@@ -45,13 +45,14 @@ const Form = styled.form`
     gap: 2rem;
 
     >button {
-        background: rgb(82,121,255);
-        background: linear-gradient(90deg, rgba(82,121,255,1) 0%, rgba(161,0,235,1) 100%);
+        background: #3563c7;
+        /* background: linear-gradient(90deg, rgba(82,121,255,1) 0%, rgba(161,0,235,1) 100%); */
         padding: 0.5rem 0;
         border-radius: 50px;
         border: none;
         color: white;
         text-transform: uppercase;
+        cursor: pointer;
     }
 `
 
@@ -78,18 +79,18 @@ function AddEmploye() {
         try {
             const {data} = req.post("/employes",formData)
             navigate("/addAttendance")
-            toast.success("Successfully added !!")
+            toast.success('Note added Successfully!!');
         } catch (error) {
             
         }
     }
   return (
     <Container>
-        <Wrapper>
+        <h1>Add Employee</h1>
+    <Wrapper>
         <div>
         <AiOutlineUserAdd/><h1>Employee Details</h1>
         </div>
-
             <Form onSubmit={handleSubmit}>
                 <Input type='name' placeholder='Employee Name' value={formData.name} name='name'  onChange={handleChange}/>
                 <Input type='tel' placeholder='Contact Number' maxLength={10} value={formData.number} name='number' onChange={handleChange}/>

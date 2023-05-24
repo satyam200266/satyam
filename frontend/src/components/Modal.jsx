@@ -17,8 +17,7 @@ const ModalOverlay = styled.div`
 const ModalContent = styled.div`
   display: flex;
   flex-direction: column;
-
-  background: #ffbebe;
+  background: #adcfff;
   padding: 20px;
   border-radius: 4px;
   box-shadow: 0 2px 4px #918d8d;
@@ -26,7 +25,7 @@ const ModalContent = styled.div`
 
 
 const Button = styled.button`
-  background: #ff6d6d;
+  background: #3563c7;
   color: white;
   border: none;
   border-radius: 4px;

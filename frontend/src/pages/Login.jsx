@@ -7,7 +7,7 @@ import { useDispatch } from 'react-redux'
 import { login } from '../redux/user'
 
 const Container = styled.div`
-    background-color: #ffbebe;
+    background-color: #adcfff;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -47,8 +47,8 @@ const Form = styled.form`
 
     }
     >button {
-        background: rgb(82,121,255);
-        background: linear-gradient(90deg, rgba(82,121,255,1) 0%, rgba(161,0,235,1) 100%);
+        background: #3563c7;
+        /* background: linear-gradient(90deg, rgba(82,121,255,1) 0%, rgba(161,0,235,1) 100%); */
         padding: 0.5rem 0;
         border-radius: 50px;
         border: none;

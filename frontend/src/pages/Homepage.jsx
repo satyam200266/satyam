@@ -1,27 +1,19 @@
-import React, { useEffect, useState } from 'react'
-import styled from "styled-components"
-// import Card from "../components/Card.jsx"
-// import {FaBook} from "react-icons/fa"
-// import {IoIosPeople} from "react-icons/io"
-import HeatMap from '../components/HeatMap.jsx'
-import { req } from '../axisInstance.js'
-import { useDispatch, useSelector } from 'react-redux'
-import { addNotice } from '../redux/notice.js'
+import React, { useEffect, useState } from 'react';
+import styled from 'styled-components';
+import HeatMap from '../components/HeatMap.jsx';
+import { req } from '../axisInstance.js';
+import { useDispatch, useSelector } from 'react-redux';
+import { addNotice } from '../redux/notice.js';
 
 const Container = styled.div`
-    padding: 0 0 2rem 0;
-  background-color: #ffbebe;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    min-height: calc(100vh - 70px);
-    >*{
-        margin: 1rem;
-    }
-    /* >img{
-      height: 100%;
-    } */
-`
+  padding: 0 1rem 2rem 1rem;
+  background-color: #adcfff;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-height: calc(100vh - 70px);
+`;
+
 const Select = styled.select`
   padding: 0.5rem 1rem;
   font-size: 1rem;
@@ -29,7 +21,7 @@ const Select = styled.select`
   border-radius: 4px;
   background-color: #ffffff;
   color: #333;
-  width: 1500px;
+  width: 100%;
 
   &:focus {
     outline: none;
@@ -37,86 +29,105 @@ const Select = styled.select`
   }
 `;
 
-// Styled Option component
 const Option = styled.option`
   color: #333;
 `;
 
-// const CardSection = styled.div`
-//     display: flex;
-//     justify-content: center;
-//     gap: 1rem;
-//     width: 80%;
-// `
+const RotatedHeatMap = styled(HeatMap)`
+  transform: rotate(-90deg);
+  width: 100vh;
+  height: 100%;
+  max-height: 80vh;
+`;
 
-
-  
 function Homepage() {
-    const notice = useSelector(p => p.notice.notice)
-    console.log(notice)
-    const dispatch = useDispatch()
-    const [employes, setEmployes] = useState([])
-    const [selectedEmployes, setSelectedEmployes] = useState(localStorage.getItem("name") || "")
-    const [attendence, setAttendence] = useState([])
-    useEffect(() => {
-        (async () => {
-            try {
-                const [emp, not] = await Promise.all([
-                    req.get(`/employes`),
-                    req.get("/notice")
-                ])
-                dispatch(addNotice(not.data))
-                setEmployes(emp.data)
-            } catch (error) {
-                console.log(error)
-            }
-        })()
-    },[])
-    useEffect(() => {
-        if(!selectedEmployes.length) return 
-        (async () => {
-            try {
-                const {data} = await req.get(`/attendence/${selectedEmployes}`)
-                setAttendence(data)
-            } catch (error) {
-                console.log(error)
-            }
-        })()
-    },[selectedEmployes])
+  const notice = useSelector((state) => state.notice.notice);
+  const dispatch = useDispatch();
+  const [employes, setEmployes] = useState([]);
+  const [selectedEmployes, setSelectedEmployes] = useState(
+    localStorage.getItem('name') || ''
+  );
+  const [attendence, setAttendence] = useState([]);
 
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const [emp, not] = await Promise.all([
+          req.get('/employes'),
+          req.get('/notice'),
+        ]);
+        dispatch(addNotice(not.data));
+        setEmployes(emp.data);
+      } catch (error) {
+        console.log(error);
+      }
+    };
 
-    const handleSelectChange = (e) => {
-        localStorage.setItem("name", e.target.value )
-        setSelectedEmployes(e.target.value)
-    }
+    fetchData();
+  }, []);
+
+  useEffect(() => {
+    if (!selectedEmployes.length) return;
+
+    const fetchAttendance = async () => {
+      try {
+        const { data } = await req.get(`/attendence/${selectedEmployes}`);
+        setAttendence(data);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+
+    fetchAttendance();
+  }, [selectedEmployes]);
+
+  const handleSelectChange = (e) => {
+    localStorage.setItem('name', e.target.value);
+    setSelectedEmployes(e.target.value);
+  };
 
   return (
     <Container>
-            {/* <CardSection>
-                <Card title="View Attendance" Logo={FaBook}/>
-                <Card title="View Employe" Logo={IoIosPeople}/>
-            </CardSection> */}
-            <div>
-            <h2 style={{padding: '2px'}}>Employee Details :-</h2>
-            <section>
-                <Select value={selectedEmployes} onChange={handleSelectChange}>
-                    <Option hidden>Select Your Name</Option>
-                    {employes.map(e => <option key={e._id} value={e._id} >{e.name}</option>)}
-                </Select>
-            </section>
-            </div>
-            <section>
-                <HeatMap userData={attendence}/>
-            </section>
+      <div>
+      <h1>DashBoard</h1>
+      </div>
+      <div>
+        <h4 style={{ padding: '2px'}}>Employee Details:-</h4>
+        <section>
+          <Select value={selectedEmployes} onChange={handleSelectChange}>
+            <Option hidden>Select Your Name</Option>
+            {employes.map((e) => (
+              <option key={e._id} value={e._id}>
+                {e.name}
+              </option>
+            ))}
+          </Select>
+        </section>
+      </div>
+      <section style={{ width: "max-content", maxWidth: '90%', overflowX: 'auto', margin: "1rem 0" }}>
+        <RotatedHeatMap userData={attendence} />
+      </section>
 
-            {notice && <div style={{ backgroundColor: '#ffffff', padding: '20px', width: '1500px',borderRadius: '4px' }}>
-                <div  style={{ display: "flex", justifyContent: "space-between" }}>
-                    <h2 style={{ padding: '2px' }}>Notice :-</h2> <small>{new Date(notice?.createdAt).toString()}</small>
-                </div>
-                <p>{notice?.title}</p>
-            </div>}
+      {notice && (
+        <div
+          style={{
+            backgroundColor: '#ffffff',
+            padding: '20px',
+            width: '100%',
+            borderRadius: '4px',
+          }}
+        >
+          <div style={{ display: 'flex', justifyContent: 'space-between' , margin: "0 1rem"}}>
+            <h3 style={{ padding: '2px' }}>Notice:-</h3>
+              <small>
+                {new Date(notice?.createdAt).toLocaleString('en-US', { dateStyle: 'short', timeStyle: 'short' })}
+              </small>
+          </div>
+          <p>{notice?.title}</p>
+        </div>
+      )}
     </Container>
-  )
+  );
 }
 
-export default Homepage
+export default Homepage;

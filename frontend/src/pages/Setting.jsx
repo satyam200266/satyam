@@ -9,7 +9,10 @@ const Container = styled.div`
   display: flex;
   justify-content:center;
   align-items: center;
+  background-color: #adcfff;
+  height: calc(100vh - 70px);
 `;
+
 const Wrapper = styled.div`
   box-sizing: border-box;
     padding: 3rem 0;

@@ -17,7 +17,7 @@ top: 0;
   padding: 0 10px;
   gap: 1rem;
   height: 70px;
-  background-color: #ff6d6d;
+  background-color: #3563c7;
 
   a {
     color: black;
@@ -108,15 +108,13 @@ function NavBar() {
     <Container>
       <Left onClick={() => navigate('/')}>
         <img src="https://static.thenounproject.com/png/3627272-200.png" alt="Logo" />
-        <h1>
-          <b>Employee Administration</b>
-        </h1>
+        <h3>Employee Administration</h3>
       </Left>
       <Right>
         {!user ? (
           <>
             <Link to="/login">Login</Link>
-            <Link to="/register">Register</Link>
+            {/* <Link to="/register">Register</Link> */}
           </>
         ) : (
           <>

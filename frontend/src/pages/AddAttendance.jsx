@@ -14,7 +14,7 @@ const Container = styled.div`
     display: flex;
     flex-direction: column;
     align-items: center;
-    background-color: #ffbebe;
+    background-color: #adcfff;
     box-sizing: border-box;
 `
 const Wrapper = styled.div`
