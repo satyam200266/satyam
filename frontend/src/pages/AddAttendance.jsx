@@ -115,7 +115,7 @@ function AddAttendence() {
 
   return (
 <Container>
-            <h1 style={{marginTop: '4px'}}>Add Employee</h1>
+            <h1 style={{marginTop: '4px'}}>Add Attendence</h1>
         <Wrapper>
             {/* <FilterSection onSubmit={search}>
                 <SearchOrder type="number" placeholder='Search Employee Name' onChange={(e) => handleS(e, {type: "search"})}></SearchOrder>
